@@ -1,0 +1,8 @@
+1. lo  primero es la vista
+2. de la vista llaman el archivo .js que tiene el nombre de la vista,
+eso esta en la carpeta custon-js
+
+3. de hay llaman el el archivo ajax que tiene el nombre de la vista
+de hay llaman los modelos
+
+proceso=Registro&id=&nombre_empleado=DALVA&apellido_empleado=MEJIA&estado=1&telefono_empleado=3454654&email_empleado=dalva@gmail.com&imagen=corazon.jpg&cimagen=&idPertenece=1
