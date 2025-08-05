@@ -309,9 +309,10 @@ function enviar_frm()
   var hasta =$("#txtAl").val();
   var disponibles =$("#txtDispo").val();
   var idcomprobante =$("#cbCompro").val();
+  var pertenece_empleado =$("#idPertenece").val();
 
   var dataString='proceso='+proceso+'&id='+id+'&fecha_resolucion='+fecha_resolucion+'&numero_resolucion='+numero_resolucion+'&serie='+serie;
-  dataString+='&desde='+desde+'&hasta='+hasta+'&disponibles='+disponibles+'&idcomprobante='+idcomprobante;
+  dataString+='&desde='+desde+'&hasta='+hasta+'&disponibles='+disponibles+'&idcomprobante='+idcomprobante+"&idPertenece="+pertenece_empleado;
 
   $.ajax({
      type:'POST',
@@ -333,7 +334,7 @@ function enviar_frm()
 
               $('#modal_iconified').modal('toggle');
 
-              cargarDiv("#reload-div","web/ajax/reload-tiraje.php");
+              cargarDiv("#reload-div","web/ajax/reload-tiraje.php?idPertenece="+pertenece_empleado);
               limpiarform();
 
               } else if(proceso == "Edicion") {
@@ -346,7 +347,7 @@ function enviar_frm()
                       type: "info"
                   });
                    $('#modal_iconified').modal('toggle');
-                  cargarDiv("#reload-div","web/ajax/reload-tiraje.php");
+                  cargarDiv("#reload-div","web/ajax/reload-tiraje.php?idPertenece="+pertenece_empleado);
 
               }
 

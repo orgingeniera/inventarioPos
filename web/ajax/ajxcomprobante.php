@@ -18,11 +18,12 @@
 			$id = $_POST['id'];
 			$comprobante = trim($_POST['comprobante']);
 			$estado = trim($_POST['estado']);
+			$idPertenece = trim($_POST['idPertenece']);
 
 			switch($proceso){
 
 			case 'Registro':
-				$funcion->Insertar_Comprobante($comprobante);
+				$funcion->Insertar_Comprobante($comprobante,$idPertenece);
 			break;
 
 			case 'Edicion':

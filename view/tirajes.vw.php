@@ -40,7 +40,7 @@
 						<tbody>
 
 						  <?php
-								$filas = $objTiraje->Listar_Tirajes();
+								$filas = $objTiraje->Listar_Tirajes($id_usuario);
 								if (is_array($filas) || is_object($filas))
 								{
 								foreach ($filas as $row => $column)
@@ -124,7 +124,8 @@
 							</div>
 
 					        <form role="form" autocomplete="off" class="form-validate-jquery" id="frmModal">
-								<div class="modal-body" id="modal-container">
+							<input type="text" id="idPertenece" name="idPertenece" class="form-control" value="<?php echo $id_usuario; ?>" >	
+							<div class="modal-body" id="modal-container">
 
 								<div class="alert alert-info alert-styled-left text-blue-800 content-group">
 						                <span class="text-semibold">Estimado usuario</span>
@@ -142,7 +143,7 @@
 													class="select-search" style="text-transform:uppercase;"
 				                            		onkeyup="javascript:this.value=this.value.toUpperCase();">
 				                            			 <?php
-															$filas = $objTiraje->Listar_Comprobantes();
+															$filas = $objTiraje->Listar_Comprobantes($id_usuario);
 															if (is_array($filas) || is_object($filas))
 															{
 															foreach ($filas as $row => $column)
@@ -251,7 +252,7 @@
 <!-- /page container -->
 </body>
 </html>
-<script type="text/javascript" src="web/custom-js/tiraje.js"></script>
+<script type="text/javascript" src="web/custom-js/tiraje.js?v=1"></script>
 <?php } else { ?>
 
 	<div class="panel-body">

@@ -265,8 +265,9 @@ function enviar_frm()
   var id = $("#txtID").val();
   var comprobante =$("#txtComprobante").val();
   var estado = $('#chkEstado').is(':checked') ? 1 : 0;
+  var pertenece_empleado =$("#idPertenece").val();
 
-  var dataString='proceso='+proceso+'&id='+id+'&comprobante='+comprobante+'&estado='+estado;
+  var dataString='proceso='+proceso+'&id='+id+'&comprobante='+comprobante+'&estado='+estado+"&idPertenece="+pertenece_empleado;
 
 
   $.ajax({
@@ -289,7 +290,7 @@ function enviar_frm()
 
               $('#modal_iconified').modal('toggle');
 
-              cargarDiv("#reload-div","web/ajax/reload-comprobante.php");
+              cargarDiv("#reload-div","web/ajax/reload-comprobante.php?idPertenece="+pertenece_empleado);
               limpiarform();
 
               } else if(proceso == "Edicion") {
@@ -302,7 +303,7 @@ function enviar_frm()
                       type: "info"
                   });
 
-                  cargarDiv("#reload-div","web/ajax/reload-comprobante.php");
+                  cargarDiv("#reload-div","web/ajax/reload-comprobante.php?idPertenece="+pertenece_empleado);
 
               }
 
