@@ -23,12 +23,13 @@
 			$CurrencyName = trim($_POST['CurrencyName']);
 			$Money = trim($_POST['Money']);
 			$Symbol = trim($_POST['Symbol']);
+			$idPertenece = trim($_POST['idPertenece']);
 
 
 			switch($proceso){
 
 			case 'Registro':
-				$funcion->Insertar_Moneda($CurrencyISO, $Language, $CurrencyName, $Money, $Symbol);
+				$funcion->Insertar_Moneda($CurrencyISO, $Language, $CurrencyName, $Money, $Symbol,$idPertenece);
 			break;
 
 			case 'Edicion':
