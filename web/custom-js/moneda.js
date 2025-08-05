@@ -251,10 +251,11 @@ function enviar_frm()
   var CurrencyName =$("#txtNombre").val();
   var Money =$("#txtMoneda").val();
   var Symbol =$("#txtSimbolo").val();
+  var pertenece_empleado =$("#idPertenece").val();
 
 
   var dataString='proceso='+proceso+'&id='+id+'&CurrencyISO='+CurrencyISO+'&Language='+Language+'&CurrencyName='+CurrencyName;
-  dataString+='&Money='+Money+'&Symbol='+Symbol;
+  dataString+='&Money='+Money+'&Symbol='+Symbol+"&idPertenece="+pertenece_empleado;
 
   $.ajax({
      type:'POST',
@@ -276,7 +277,7 @@ function enviar_frm()
 
               $('#modal_iconified').modal('toggle');
 
-              cargarDiv("#reload-div","web/ajax/reload-moneda.php");
+              cargarDiv("#reload-div","web/ajax/reload-moneda.php?idPertenece="+pertenece_empleado);
               limpiarform();
 
               } else if(proceso == "Edicion") {
@@ -289,7 +290,7 @@ function enviar_frm()
                       type: "info"
                   });
                    $('#modal_iconified').modal('toggle');
-                  cargarDiv("#reload-div","web/ajax/reload-moneda.php");
+                  cargarDiv("#reload-div","web/ajax/reload-moneda.php?idPertenece="+pertenece_empleado);
 
               }
 

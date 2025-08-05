@@ -7,7 +7,7 @@
 		public static function Listar_Usuarios($idpertenece)
 		{
 			$dbconec = Conexion::Conectar();
-
+			
 			try 
 			{
 				$query = "CALL sp_view_usuario(:pertenece);";
@@ -38,7 +38,7 @@
 				
 
 				if ($idpertenece != 0) {
-					 $query = "CALL sp_view_empleado_activo_por_pertenencia(:pertenece);";
+					 $query = "CALL sp_view_empleado_activo_por_pertenece(:pertenece);";
 					 $stmt = $dbconec->prepare($query);
 					 $stmt->bindParam(':pertenece', $idpertenece, PDO::PARAM_INT);
 				}else{
