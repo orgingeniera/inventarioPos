@@ -2,16 +2,16 @@
 
 	class Comprobante {
 
-		public static function Listar_Comprobantes(){
+		public static function Listar_Comprobantes($idpertenece){
 
-			$filas = ComprobanteModel::Listar_Comprobantes();
+			$filas = ComprobanteModel::Listar_Comprobantes($idpertenece);
 			return $filas;
 		
 		}
 
-		public static function Insertar_Comprobante($comprobante){
+		public static function Insertar_Comprobante($comprobante,$idpertenece){
 
-			$cmd = ComprobanteModel::Insertar_Comprobante($comprobante);
+			$cmd = ComprobanteModel::Insertar_Comprobante($comprobante,$idpertenece);
 			
 		}
 
