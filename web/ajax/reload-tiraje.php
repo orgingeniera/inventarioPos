@@ -9,7 +9,7 @@
 	});
 
 	$objTiraje =  new Tiraje();
-
+	$idPertenece = $_GET['idPertenece'] ?? null;
  ?>					<table class="table datatable-basic table-xxs table-hover">
 						<thead>
 							<tr>
@@ -25,7 +25,7 @@
 						<tbody>
 						
 						  <?php 
-								$filas = $objTiraje->Listar_Tirajes(); 
+								$filas = $objTiraje->Listar_Tirajes($idPertenece); 
 								if (is_array($filas) || is_object($filas))
 								{
 								foreach ($filas as $row => $column) 

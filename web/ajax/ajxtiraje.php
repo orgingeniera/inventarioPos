@@ -24,13 +24,14 @@
 			$hasta = trim($_POST['hasta']);
 			$disponibles = trim($_POST['disponibles']);
 			$idcomprobante = trim($_POST['idcomprobante']);
-
+			$idPertenece = trim($_POST['idPertenece']);
+			
 			$fecha_resolucion = DateTime::createFromFormat('d/m/Y H:i:s', $fecha_resolucion)->format('Y-m-d H:i:s');
 
 			switch($proceso){
 
 			case 'Registro':
-				$funcion->Insertar_Tiraje($fecha_resolucion,$numero_resolucion,$serie,$desde,$hasta,$disponibles,$idcomprobante);
+				$funcion->Insertar_Tiraje($fecha_resolucion,$numero_resolucion,$serie,$desde,$hasta,$disponibles,$idcomprobante,$idPertenece);
 			break;
 
 			case 'Edicion':

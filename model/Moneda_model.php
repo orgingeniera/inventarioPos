@@ -4,14 +4,21 @@
 
 	class MonedaModel extends Conexion
 	{
-		public static function Listar_Monedas()
+		public static function Listar_Monedas($idpertenece)
 		{
 			$dbconec = Conexion::Conectar();
 
 			try 
 			{
-				$query = "CALL sp_view_currency();";
-				$stmt = $dbconec->prepare($query);
+				if ($idpertenece != 0) {
+					$query = "CALL sp_view_currency_pertenece(:pertenece);";
+					$stmt = $dbconec->prepare($query);
+					$stmt->bindParam(':pertenece', $idpertenece, PDO::PARAM_INT);
+				}else{
+					$query = "CALL sp_view_currency();";
+				    $stmt = $dbconec->prepare($query);
+				}
+				
 				$stmt->execute();
 				$count = $stmt->rowCount();
 

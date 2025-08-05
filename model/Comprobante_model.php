@@ -4,14 +4,21 @@
 
 	class ComprobanteModel extends Conexion
 	{
-		public static function Listar_Comprobantes()
+		public static function Listar_Comprobantes($idpertenece)
 		{
 			$dbconec = Conexion::Conectar();
 
 			try 
 			{
-				$query = "CALL sp_view_comprobante();";
-				$stmt = $dbconec->prepare($query);
+				if ($idpertenece != 0) {
+					$query = "CALL sp_view_comprobante_pertenece(:pertenece);";
+					$stmt = $dbconec->prepare($query);
+					$stmt->bindParam(':pertenece', $idpertenece, PDO::PARAM_INT);
+				}else{
+					$query = "CALL sp_view_comprobante();";
+					$stmt = $dbconec->prepare($query);
+				}
+				
 				$stmt->execute();
 				$count = $stmt->rowCount();
 
@@ -28,14 +35,16 @@
 			}
 		}
 
-		public static function Insertar_comprobante($comprobante)
+		public static function Insertar_comprobante($comprobante,$pertenece)
 		{
 			$dbconec = Conexion::Conectar();
 			try 
 			{
-				$query = "CALL sp_insert_comprobante(:comprobante)";
+
+				$query = "CALL sp_insertar_comprobante_todo(:comprobante, :pertenece)";
 				$stmt = $dbconec->prepare($query);
-				$stmt->bindParam(":comprobante",$comprobante);
+				$stmt->bindParam(":comprobante", $comprobante);
+				$stmt->bindParam(":pertenece", $pertenece);
 
 				if($stmt->execute())
 				{

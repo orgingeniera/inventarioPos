@@ -4,14 +4,21 @@
 
 	class TirajeModel extends Conexion
 	{
-		public static function Listar_Tirajes()
+		public static function Listar_Tirajes($idpertenece)
 		{
 			$dbconec = Conexion::Conectar();
 
 			try 
 			{
-				$query = "CALL sp_view_tiraje();";
-				$stmt = $dbconec->prepare($query);
+				if ($idpertenece != 0) {
+					$query = "CALL sp_view_tiraje_pertenece(:pertenece);";
+					$stmt = $dbconec->prepare($query);
+					$stmt->bindParam(':pertenece', $idpertenece, PDO::PARAM_INT);
+				}else{
+					$query = "CALL sp_view_tiraje();";
+					$stmt = $dbconec->prepare($query);
+				}
+				
 				$stmt->execute();
 				$count = $stmt->rowCount();
 
@@ -28,14 +35,21 @@
 			}
 		}
 
-		public static function Listar_Comprobantes()
+		public static function Listar_Comprobantes($idpertenece)
 		{
 			$dbconec = Conexion::Conectar();
 
 			try 
 			{
-				$query = "CALL sp_view_comprobante_activo();";
-				$stmt = $dbconec->prepare($query);
+				if ($idpertenece != 0) {
+					$query = "CALL sp_view_comprobantes_activos_pertenece(:pertenece);";
+					$stmt = $dbconec->prepare($query);
+					$stmt->bindParam(':pertenece', $idpertenece, PDO::PARAM_INT);
+				}else{
+					$query = "CALL sp_view_comprobante_activo();";
+					$stmt = $dbconec->prepare($query);
+				}
+				
 				$stmt->execute();
 				$count = $stmt->rowCount();
 
@@ -53,12 +67,12 @@
 		}
 
 
-		public static function Insertar_Tiraje($fecha_resolucion, $numero_resolucion, $serie, $desde, $hasta, $disponibles, $idcomprobante)
+		public static function Insertar_Tiraje($fecha_resolucion, $numero_resolucion, $serie, $desde, $hasta, $disponibles, $idcomprobante,$idpertenece)
 		{
 			$dbconec = Conexion::Conectar();
 			try 
 			{
-				$query = "CALL sp_insert_tiraje_comprobante(:fecha_resolucion, :numero_resolucion, :serie, :desde, :hasta, :disponibles, :idcomprobante)";
+				$query = "CALL sp_insert_tiraje_comprobante(:fecha_resolucion, :numero_resolucion, :serie, :desde, :hasta, :disponibles, :idcomprobante,:pertenece)";
 				$stmt = $dbconec->prepare($query);
 				$stmt->bindParam(":fecha_resolucion",$fecha_resolucion);
 				$stmt->bindParam(":numero_resolucion",$numero_resolucion);
@@ -67,9 +81,10 @@
 				$stmt->bindParam(":hasta",$hasta);
 				$stmt->bindParam(":disponibles",$disponibles);
 				$stmt->bindParam(":idcomprobante",$idcomprobante);
+				$stmt->bindParam(":pertenece",$idpertenece);
 
 				if($stmt->execute())
-				{
+				{ 
 					$count = $stmt->rowCount();
 					if($count == 0){
 						$data = "Duplicado";

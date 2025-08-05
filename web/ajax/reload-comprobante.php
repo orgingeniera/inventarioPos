@@ -9,7 +9,7 @@
 	});
 
 	$objComprobante =  new Comprobante();
-
+	$idPertenece = $_GET['idPertenece'] ?? null;
 ?>	
 
 
@@ -26,7 +26,7 @@
 						<tbody>
 						
 						  <?php 
-								$filas = $objComprobante->Listar_Comprobantes(); 
+								$filas = $objComprobante->Listar_Comprobantes($idPertenece); 
 								if (is_array($filas) || is_object($filas))
 								{
 								foreach ($filas as $row => $column) 
