@@ -2,12 +2,21 @@ function cargarDiv(div,url)
 {
       $(div).load(url);
 }
+var idUsuario;
+	// Obtener parámetros de la URL del script actual
+const scripts = document.getElementsByTagName('script');
+const currentScript = scripts[scripts.length - 1]; // Último script (este mismo archivo)
+const urlParams = new URLSearchParams(currentScript.src.split('?')[1]);
 
+ idUsuario = urlParams.get('id_usuario');
 $(function() {
+
+
 
     var urlprocess = 'web/ajax/ajxinventario.php';
     var proceso = 'Validar';
-    var dataString='proceso='+proceso;
+    var dataString='proceso='+proceso+'&idPertenece='+idUsuario;
+	
 
     $.ajax({
        type:'POST',
@@ -15,7 +24,7 @@ $(function() {
        data: dataString,
        dataType: 'json',
        success: function(data){
-
+		
        	 if(data=="Validado"){
 
        	 	cargarDiv("#reload-div","web/ajax/reload-closeinventario.php");
@@ -34,7 +43,7 @@ $(function() {
              });*/
 
 
-             cargarDiv("#reload-div","web/ajax/reload-openinventario.php");
+             cargarDiv("#reload-div","web/ajax/reload-openinventario.php?idPertenece="+idUsuario);
 
           } else if(data =="Error"){
 
@@ -68,7 +77,7 @@ function AbrirInventario(){
 
 	 var urlprocess = 'web/ajax/ajxinventario.php';
 	  var proceso = 'Abrir';
-	  var dataString='proceso='+proceso;
+	  var dataString='proceso='+proceso+'&idPertenece='+idUsuario;
 
 	  $.ajax({
 	     type:'POST',
@@ -76,9 +85,9 @@ function AbrirInventario(){
 	     data: dataString,
 	     dataType: 'json',
 	     success: function(data){
-
+ 
 	        if(data=="Validado"){
-
+			
              swal({
                   title: "Exito!",
                   text: "Inventario abierto",
@@ -90,7 +99,7 @@ function AbrirInventario(){
 
 	        } else if (data=="Vigente"){
 
-
+				
 
 
  				cargarDiv("#reload-div","web/ajax/reload-closeinventario.php");
@@ -126,7 +135,7 @@ function CerrarInventario(){
 
 	 var urlprocess = 'web/ajax/ajxinventario.php';
 	  var proceso = 'Cerrar';
-	  var dataString='proceso='+proceso;
+	  var dataString='proceso='+proceso+'&idPertenece='+idUsuario;
 
 	  $.ajax({
 	     type:'POST',
@@ -160,17 +169,16 @@ function CerrarInventario(){
 	            });
 	        }
 
-	     },error: function() {
+	     },error: function(xhr, status, error) {
+			
 
-	         swal({
-	            title: "Lo sentimos...",
-	            text: "Algo sucedio mal!",
-	            confirmButtonColor: "#EF5350",
-	            type: "error"
-	        });
-
-
-	     }
+			swal({
+				title: "Lo sentimos...",
+				text: "Algo sucedió mal!",
+				confirmButtonColor: "#EF5350",
+				type: "error"
+			});
+		}
 
 	  });
 

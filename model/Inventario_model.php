@@ -81,13 +81,15 @@
 
 
 
-		public static function Validar_Inventario()
+		public static function Validar_Inventario($idpertenece)
 		{
 			$dbconec = Conexion::Conectar();
 			try
 			{
-				$query = "CALL sp_validar_inventario()";
+				//$query = "CALL sp_validar_inventario($idpertenece)";
+				$query = "CALL sp_validar_inventario_pertenece(:idpertenece)";
 				$stmt = $dbconec->prepare($query);
+				$stmt->bindParam(':idpertenece', $idpertenece, PDO::PARAM_INT);
 
 				if($stmt->execute())
 				{
@@ -124,14 +126,21 @@
 
 		}
 
-
-		public static function Abrir_Inventario()
+		/*
+	    Cada mes, el sistema verifica si hay productos registrados.
+		Si hay productos y aún no se ha abierto un inventario para este mes,
+		lo abre y copia el stock actual como saldo inicial. 
+		Si ya existe un inventario, lo reabre si estaba cerrado. 
+		Si no hay productos, no hace nada y avisa. */
+		public static function Abrir_Inventario($idpertenece)
 		{
 			$dbconec = Conexion::Conectar();
 			try
 			{
-				$query = "CALL sp_abrir_inventario()";
+				//este era el que estaba $query = "CALL sp_abrir_inventario()";
+				$query = "CALL  sp_abrir_inventario_pertenece(:pertenece)";
 				$stmt = $dbconec->prepare($query);
+				$stmt->bindParam(':pertenece', $idpertenece, PDO::PARAM_INT);
 
 				if($stmt->execute())
 				{
@@ -167,13 +176,16 @@
 
 		}
 
-		public static function Cerrar_Inventario()
+		public static function Cerrar_Inventario($idPertenece)
 		{
+
+			
 			$dbconec = Conexion::Conectar();
 			try
 			{
-				$query = "CALL sp_cerrar_inventario_manual()";
+				$query = "CALL sp_cerrar_inventario_pertenece($idPertenece)";
 				$stmt = $dbconec->prepare($query);
+				//$stmt->bindParam(':pertenece', $idpertenece, PDO::PARAM_INT);
 
 				if($stmt->execute())
 				{

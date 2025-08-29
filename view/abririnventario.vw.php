@@ -1,6 +1,9 @@
 	<?php if($tipo_usuario==1 || 3){ ?>
 			<!-- Basic initialization -->
 				<div class="panel panel-flat">
+					<?php 
+ echo $id_usuario;
+?>
 				 <div id="reload-div">
 
 				 </div>
@@ -16,7 +19,8 @@
 <!-- /page container -->
 </body>
 </html>
-<script type="text/javascript" src="web/custom-js/open-inventario.js"></script>
+<script type="text/javascript" src="web/custom-js/open-inventario.js?id_usuario=<?php echo $id_usuario; ?>"></script>
+
 
 <?php } else { ?>
 
