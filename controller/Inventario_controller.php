@@ -37,21 +37,21 @@
 		}
 
 
-		public static function Abrir_Inventario(){
+		public static function Abrir_Inventario($idPertenece){
 
-			$cmd = InventarioModel::Abrir_Inventario();
+			$cmd = InventarioModel::Abrir_Inventario($idPertenece);
 			
 		}
 
-		public static function Cerrar_Inventario(){
+		public static function Cerrar_Inventario($idPertenece){
 
-			$cmd = InventarioModel::Cerrar_Inventario();
+			$cmd = InventarioModel::Cerrar_Inventario($idPertenece);
 			
 		}
 
-		public static function Validar_Inventario(){
+		public static function Validar_Inventario($idPertenece){
 
-			$cmd = InventarioModel::Validar_Inventario();
+			$cmd = InventarioModel::Validar_Inventario($idPertenece);
 			
 		}
 	}
