@@ -14,11 +14,13 @@
 	      $year = date('Y');
 	      return date('d/m/y', mktime(0,0,0, $month, 1, $year));
 	  }
+	  $idPertenece = $_GET['idPertenece'] ?? null;
  ?>
 
 	<div class="row">
 		<div class="col-md-12">
-
+			
+					<i class="icon-key"></i> Abrir Inventario</button>
 			<!-- Widget with rounded icon -->
 			<div class="panel">
 				<div class="panel-body text-center">

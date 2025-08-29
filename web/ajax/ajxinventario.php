@@ -15,21 +15,21 @@
 		try {
 
 			$proceso = $_POST['proceso'];
-
+			$idPertenece = trim($_POST['idPertenece']);
 
 			switch($proceso){
 
 			case 'Validar':
-				$funcion->Validar_Inventario();
+				$funcion->Validar_Inventario($idPertenece);
 			break;
 
 
 			case 'Abrir':
-				$funcion->Abrir_Inventario();
+				$funcion->Abrir_Inventario($idPertenece);
 			break;
 
 			case 'Cerrar':
-				$funcion->Cerrar_Inventario();
+				$funcion->Cerrar_Inventario($idPertenece);
 			break;
 			
 			default:
